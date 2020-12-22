@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOTE NOW - Accounts</title>
+</head>
+<body>
+    {% if messages %}
+                    <div class=''>
+                        {% for message in messages %}
+                        <div class='notification {{message.tags}}' id='disappear'>
+                                <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>
+                                
+                        </div>
+                    </div>
+                        {% endfor %}
+                    
+            {% endif %}
+    Hello {{request.user.name}}, Welcome to Accounts
+
+    <a href='{% url "account:logout" %}'>Logout</a>
+</body>
+</html>

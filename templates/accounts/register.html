@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOTE NOW - Register</title>
+</head>
+<body>
+    <div class="container">
+        {% if messages %}
+                    <div class=''>
+                        {% for message in messages %}
+                        <div class='notification {{message.tags}}' id='disappear'>
+                                <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>
+                                
+                        </div>
+                    </div>
+                        {% endfor %}
+                    
+            {% endif %}
+        <h1 class='reg-title'>Register</h1>
+        <form method="POST">
+            <!--Name and Email-->
+            <div class="row">
+                <div class="col-lg-6 col-md-6 mb-2">
+                    <div class='input-group '>
+                        
+                        {{ user_form.name }}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 mb-2">
+                    <div class="input-group">
+                        {{ user_form.email }}
+                    </div>
+                </div>
+            </div>
+           <!--Passwords-->
+            <div class='input-group '>
+                
+                {{ user_form.password}}
+            </div>
+            <br>
+            <div class='input-group '>
+                
+                {{ user_form.password_}}
+                <div class='invalid-feedback hidden' id='no-match'>
+                    <span style='font-size: x-small;'>Passwords do not match</span>
+                </div>
+            </div>
+            <br>
+
+           
+            {% csrf_token %}
+            <input type='submit' class='btn btn-block btn-success mb-4' value='Register'>
+        </form>
+    </div>
+</body>
+</html>

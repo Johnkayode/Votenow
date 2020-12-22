@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOTE NOW - Confirm Email</title>
+</head>
+<body>
+    <div class="container">
+        {% if messages %}
+                    <div class=''>
+                        {% for message in messages %}
+                        <div class='notification {{message.tags}}' id='disappear'>
+                                <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>
+                                
+                        </div>
+                    </div>
+                        {% endfor %}
+                    
+            {% endif %}
+        <h1 class='reg-title'>Confirm Account</h1>
+        <form method="POST">
+            <!--Confirmation Code-->
+            <div class="input-group">
+                {{ form.confirmation_code }}
+            </div>
+           
+            {% csrf_token %}
+            <input type='submit' class='btn btn-block btn-success mb-4' value='Confirm'>
+        </form>
+
+        <a>Resend Confirmation Code</a>
+    </div>
+</body>
+</html>
