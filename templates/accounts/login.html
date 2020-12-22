@@ -1,42 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOTE NOW - Login</title>
-</head>
-<body>
+{% extends 'contests/base.html' %}
+{% block title %} Login Now {% endblock %}
+
+{% block body %}
     <div class="container">
         {% if messages %}
-                    <div class=''>
-                        {% for message in messages %}
-                        <div class='notification {{message.tags}}' id='disappear'>
-                                <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>
-                                
+            <div class=''>
+                {% for message in messages %}
+                    <div class='notification {{message.tags}}' id='disappear'>
+                        <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>     
+                    </div>
+                {% endfor %}
+            </div>         
+        {% endif %}
+
+        <div id="login">
+            <div class="container">
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-6">
+                        <div id="login-box" class="col-md-12">
+                            <form id="login-form" class="form" action="" method="post">
+                                {% csrf_token %}
+                                <h3 class="text-center text-info">Login</h3>
+                                <div class="form-group">
+                                    <label for="username" class="text-info">Email:</label><br>
+                                    <div class="form-control">
+                                        {{ form.email }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="text-info">Password:</label><br>
+                                    <div class="form-control">
+                                        {{ form.password }}
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                </div>
+                                <div id="register-link" class="text-right">
+                                    <a href="{% url 'account:register' %}" class="text-info">Register</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                        {% endfor %}
-                    
-            {% endif %}
-        <h1 class='reg-title'>Login</h1>
-        <form method="POST">
-            <!--Email-->
-            <div class="input-group">
-                {{ form.email }}
+                </div>
             </div>
-
-           <!--Password-->
-            <div class='input-group '>
-                
-                {{ form.password }}
-            </div>
-            <br>
-            
-
-           
-            {% csrf_token %}
-            <input type='submit' class='btn btn-block btn-success mb-4' value='Login'>
-        </form>
+        </div>
     </div>
-</body>
-</html>
+
+
+    <!--STYLE SHEET STARTS HERE -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://cdn.pixabay.com/photo/2017/03/19/18/00/the-traffic-light-2157162_960_720.jpg');
+            height: 100vh;
+        }
+        #login .container #login-row #login-column #login-box {
+        margin-top: 120px;
+        max-width: 500px;
+        height: 320px;
+        border: 1px solid #9C9C9C;
+        background-color: #EAEAEA;
+        }
+        #login .container #login-row #login-column #login-box #login-form {
+        padding: 20px;
+        }
+        #login .container #login-row #login-column #login-box #login-form #register-link {
+        margin-top: -85px;
+        }
+        #register-link{
+            padding: 50px;
+            float: right;
+            text-decoration: none;
+        }
+    </style>
+{% endblock %}
