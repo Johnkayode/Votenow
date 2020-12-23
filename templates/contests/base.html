@@ -1,23 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vote Now - {% block title %}{% endblock %}</title>
-</head>
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>VoteNow - {% block title %}{% endblock %}</title>
+  </head>
+  <body>
     {% block body %}
-    {% if messages %}
-                    <div class=''>
-                        {% for message in messages %}
-                        <div class='notification {{message.tags}}' id='disappear'>
-                                <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>
-                                
-                        </div>
+        {% if messages %}
+            <div class='container'>
+                {% for message in messages %}
+                    <div class='notification {{message.tags}}' id='disappear'>
+                        <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>      
                     </div>
-                        {% endfor %}
-                    
-            {% endif %}
+                {% endfor %}
+            </div>       
+        {% endif %}
     {% endblock %}
-</body>
+    
+  </body>
 </html>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
