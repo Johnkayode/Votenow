@@ -15,7 +15,6 @@ def dashboard(request):
 
 
 def register(request):
-    
     if request.user.is_authenticated:
         return redirect('account:dashboard')  
 
@@ -56,27 +55,27 @@ def register(request):
         user_form = UserRegistrationForm()
         context = {'user_form':user_form}
         return render(request, 'accounts/register.html', context)
-
+    
 def confirm(request):
     if request.method == 'POST':
         form = ConfirmationForm(request.POST)
         if form.is_valid():
-            code = form.cleaned_data('confirmation_code')
-            try:
-                user = CustomUser.objects.get(confirmation_code=code).first()
-            except CustomUser.DoesNotExist:
+            code = form.cleaned_data['confirmation_code']
+            
+            user = CustomUser.objects.filter(confirmation_code=code).first()
+            if user is None:
                 messages.error(request, 'Confirmation code is invalid')
                 context = {'form':form}
                 return render(request, 'accounts/confirm.html', context)
-            if user.is_confirmed or user.is_active:
+            elif user.is_confirmed or user.is_active:
                 messages.info(request, 'Account already confirmed')
                 return redirect('account:confirm')
-
-            user.is_confirmed = True
-            user.is_active = True
-            user.save()
-            messages.success(request, 'Your account has been confirmed. You can log in')
-            return redirect('account:login')
+            else:
+                user.is_confirmed = True
+                user.is_active = True
+                user.save()
+                messages.success(request, 'Your account has been confirmed. You can log in')
+                return redirect('account:login')
         else:
             messages.error(request, 'An error occured during form submission')
             context = {'form':form}
