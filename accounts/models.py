@@ -1,5 +1,11 @@
+import qrcode
+from io import StringIO, BytesIO
+import base64
+
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _ 
 
@@ -38,17 +44,31 @@ class CustomUser(AbstractUser):
     is_confirmed = models.BooleanField(_("is confirmed"), default=False)
     is_organizer = models.BooleanField(_("is organizer"), default=False)
     is_contester = models.BooleanField(_("is contestant"), default=False)
+    qr_code = models.ImageField(upload_to='qrcodes', blank=True, null=True)
     confirmation_code = models.IntegerField(
         _("confirmation code"), default=generate_code
     )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
-
+ 
     objects = CustomUserManager()
 
     def __str__(self):
         return self.email
+
+    def generate_qrcode(self):
+        qr = qrcode.QRCode(version=1,error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=6, border=0)
+        qr.add_data(self.email)
+        qr.make(fit=True)
+        img = qr.make_image(fill='black', back_color='white')
+        buffer = BytesIO()
+        img.save(buffer, 'PNG')
+        buffer.seek(0)
+        filename = f'{self.name}'
+        filebuffer = InMemoryUploadedFile(buffer,None, filename, 'image/png',buffer.getbuffer().nbytes, None)
+        self.qr_code.save(filename, filebuffer)
+
 
 class Contestant(models.Model):
     user = models.ForeignKey(CustomUser, models.CASCADE)

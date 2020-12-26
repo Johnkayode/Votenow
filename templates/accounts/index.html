@@ -18,7 +18,12 @@
                     
             {% endif %}
     Hello {{request.user.name}}, Welcome to Accounts
-
+    <a href='{% url "account:change_password" %}'>Change Password</a>
     <a href='{% url "account:logout" %}'>Logout</a>
+    
+    <img src='{{request.user.qr_code.url}}'>
+    <a href='{{request.user.qr_code.url}}' download="{{user.name}}_qrcode">
+        <button type='button'>Download</button>
+    </a>
 </body>
 </html>

@@ -1,4 +1,4 @@
-{% extends 'accountss/base.html' %}
+{% extends 'accounts/base.html' %}
 {% block title %} Login Now {% endblock %}
 
 {% block body %}
@@ -26,7 +26,7 @@
                                 </div>
                                 <br />
                                 <div class="form-group">
-                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="Sign In">
                                 </div>
                                 <div id="register-link" class="text-right">
                                     <p class="text-muted">Don't have an account? <a href="{% url 'account:register' %}" class="text-info">Register</a></p>

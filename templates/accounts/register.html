@@ -19,7 +19,7 @@
                     <div id="login-column" class="col-md-6">
                         <div id="login-box" class="col-md-12">
                             <form id="login-form" class="form" action="" method="post">
-                                {% csrf_token %}
+                                
                                 <h3 class="text-center text-info">Register</h3>
                                 <div class="form-group">
                                     <label for="username" class="text-info">Name:</label><br>
@@ -46,6 +46,7 @@
                                     
                                 </div>
                                 <br />
+                                {% csrf_token %}
                                 <div class="form-group">
                                     <input type="submit" name="submit" class="btn btn-info btn-md" value="Join Now">
                                 </div>

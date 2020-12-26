@@ -28,8 +28,8 @@
             {% csrf_token %}
             <input type='submit' class='btn btn-block btn-success mb-4' value='Confirm'>
         </form>
-
-        <a>Resend Confirmation Code</a>
+        
+        <a href='{% url "account:resend" id=id %}'>Resend Confirmation Code</a>
     </div>
 </body>
 </html>

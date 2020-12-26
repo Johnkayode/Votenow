@@ -36,6 +36,7 @@ def register(request):
                 new_user.set_password(user_form.cleaned_data['password'])
                 new_user.is_active = False
                 new_user.save()
+                new_user.generate_qrcode()
                 '''
                 try:
                     send_confirm_mail(user=new_user, email=user_form.cleaned_data['email'])
@@ -45,7 +46,7 @@ def register(request):
                 '''
                 send_confirm_mail(user=new_user, email=user_form.cleaned_data['email'])
                 messages.info(request, 'A confirmation code has been sent to your address, please confirm your email address to activate your account')
-                return redirect('account:confirm')
+                return redirect('account:confirm', id=new_user.id)
 
         else:
             context = {'user_form':user_form}
@@ -56,20 +57,20 @@ def register(request):
         context = {'user_form':user_form}
         return render(request, 'accounts/register.html', context)
     
-def confirm(request):
+def confirm(request, id):
     if request.method == 'POST':
         form = ConfirmationForm(request.POST)
         if form.is_valid():
             code = form.cleaned_data['confirmation_code']
             
-            user = CustomUser.objects.filter(confirmation_code=code).first()
+            user = CustomUser.objects.filter(confirmation_code=code, id=id).first()
             if user is None:
                 messages.error(request, 'Confirmation code is invalid')
                 context = {'form':form}
                 return render(request, 'accounts/confirm.html', context)
             elif user.is_confirmed or user.is_active:
                 messages.info(request, 'Account already confirmed')
-                return redirect('account:confirm')
+                return redirect('account:confirm',id=id)
             else:
                 user.is_confirmed = True
                 user.is_active = True
@@ -78,14 +79,27 @@ def confirm(request):
                 return redirect('account:login')
         else:
             messages.error(request, 'An error occured during form submission')
-            context = {'form':form}
+            context = {'form':form, 'id':id}
             return render(request, 'accounts/confirm.html', context)
 
 
     form = ConfirmationForm()
-    context = {'form':form}
+    print(id)
+    context = {'form':form, 'id':id}
     return render(request, 'accounts/confirm.html',context)
 
+def resend_code(request, id):
+    user = CustomUser.objects.get(id=id)
+    form = ConfirmationForm()
+    
+    if user:
+        send_confirm_mail(user=user, email=user.email)
+        messages.info(request, 'A confirmation code has been sent to your address, please confirm your email address to activate your account')
+        return redirect('account:confirm',id=id)
+
+def password_changed(request):
+    messages.success(request, 'Password changed')
+    return redirect('account:dashboard')
 
 def login_user(request):
     if request.user.is_authenticated:
