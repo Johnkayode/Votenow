@@ -120,3 +120,5 @@ def login_user(request):
         form = CustomAuthForm()
         context = {'form': form}
         return render(request, 'accounts/login.html', context)
+
+

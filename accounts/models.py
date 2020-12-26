@@ -2,6 +2,7 @@ import qrcode
 from io import StringIO, BytesIO
 import base64
 
+
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -42,8 +43,6 @@ class CustomUser(AbstractUser):
     email = models.EmailField(_("email address"), blank=False, unique=True)
     name = models.CharField(_("name"), max_length=150, blank=False)
     is_confirmed = models.BooleanField(_("is confirmed"), default=False)
-    is_organizer = models.BooleanField(_("is organizer"), default=False)
-    is_contester = models.BooleanField(_("is contestant"), default=False)
     qr_code = models.ImageField(upload_to='qrcodes', blank=True, null=True)
     confirmation_code = models.IntegerField(
         _("confirmation code"), default=generate_code
@@ -69,17 +68,3 @@ class CustomUser(AbstractUser):
         filebuffer = InMemoryUploadedFile(buffer,None, filename, 'image/png',buffer.getbuffer().nbytes, None)
         self.qr_code.save(filename, filebuffer)
 
-
-class Contestant(models.Model):
-    user = models.ForeignKey(CustomUser, models.CASCADE)
-    name = models.CharField(_("name"), max_length=150, blank=False)
-    about = models.CharField(_("name"), max_length=150, blank=True)
-    def __str__(self):
-        return self.user.name
-
-class Organizer(models.Model):
-    user = models.ForeignKey(CustomUser, models.CASCADE)
-    name = models.CharField(_("name"), max_length=150, blank=False)
-    about = models.CharField(_("name"), max_length=150, blank=True)
-    def __str__(self):
-        return self.user.name

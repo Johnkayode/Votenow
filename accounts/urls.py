@@ -15,4 +15,5 @@ urlpatterns = [
     path('resend-code/<int:id>/', views.resend_code, name='resend'),
     path('change-password/', auth_views.PasswordChangeView.as_view(form_class=PasswordChangeCustomForm,template_name='accounts/password_change.html', success_url=reverse_lazy('account:password_changed')), name='change_password'),
     path('change-password/done/', views.password_changed, name='password_changed'),
+    
 ]
