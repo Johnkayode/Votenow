@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
 
@@ -7,11 +8,17 @@ from .mail import send_confirm_mail
 from .models import *
 from .forms import CustomAuthForm, UserRegistrationForm, ConfirmationForm
 
-def dashboard(request):
-    if request.user.is_authenticated:
-        context = {}
-        return render(request,'accounts/index.html', context)
+
+@login_required
+def dashboard(request, id):
+    user = CustomUser.objects.filter(id=id).first()
+    if user == request.user:
+        context = {'user': user}
+        return render(request, 'accounts/index.html', context)
     return redirect('contest:home')
+
+    
+
 
 
 def register(request):
@@ -103,7 +110,7 @@ def password_changed(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-        return redirect('account:dashboard')
+        return redirect('account:dashboard', id=request.user.id)
     else:
         if request.method == 'POST':
             form = CustomAuthForm(request.POST)
@@ -114,7 +121,7 @@ def login_user(request):
                     if user.is_active:
                         login(request, user)
                         messages.success(request, 'Logged in successfully')
-                        return redirect('account:dashboard')
+                        return redirect('account:dashboard', id=user.id)
                 else:
                     messages.error(request, 'Account does not exist')
         form = CustomAuthForm()
