@@ -13,42 +13,38 @@
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 <body>
+    {% if messages %}
+    <div class=''>
+        {% for message in messages %}
+            <div class='notification {{message.tags}}' id='disappear'>
+                <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>      
+            </div>
+        {% endfor %}
+    </div>        
+    {% endif %}
 
-{% if messages %}
-  <div class=''>
-      {% for message in messages %}
-          <div class='notification {{message.tags}}' id='disappear'>
-              <p>{{message|safe}} <span class='float-right ' onclick='disappear()'><i class='fas fa-times'></i></span></p>      
-          </div>
-      {% endfor %}
-  </div>        
-{% endif %}
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="{{request.user.qr_code.url}}" alt="Qrcode" class="form-control">
+                <p class="text">{{request.user.name}}</p>
+            </div>
 
-<div class="wrapper">
-    <div class="sidebar">
-        <div class="logo">
-            <img src="{{request.user.qr_code.url}}" alt="Qrcode" class="form-control">
-            <p class="text">{{request.user.name}}</p>
+            <ul>
+                <li><a href="{% url 'account:dashboard' id=request.user.id %}"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="#"><i class="fas fa-project-diagram"></i>Join Contest</a></li>
+                <li><a href="#"><i class="fas fa-poll-h"></i>Create Contest</a></li>
+                <li><a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+            <!--
+            <div class="social_media">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
-
-        <ul>
-            <li><a href="{% url 'account:dashboard' id=request.user.id %}"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="#"><i class="fas fa-project-diagram"></i>Join Contest</a></li>
-            <li><a href="#"><i class="fas fa-poll-h"></i>Create Contest</a></li>
-            <li><a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-        </ul>
-        <!--
-        <div class="social_media">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-      </div>
-        -->
+            -->
+        </div>
     </div>
-    {% block body %}
-    {% endblock %}
-
-</div>
-  
+    {% block body %}{% endblock %}
 </body>
 </html>
