@@ -1,4 +1,6 @@
+from accounts.utils import decode_data
 from django.shortcuts import render, redirect
+
 
 from .forms import UploadQrcodeForm
 from .models import *
@@ -21,8 +23,9 @@ def verify(request):
             im = cv.imdecode(npimg, cv.IMREAD_COLOR)
             det = cv.QRCodeDetector()
             retval, points, straight_qrcode = det.detectAndDecode(im)
-            print(retval)
-            return redirect('account:dashboard')
+            email = decode_data(retval)
+            print(email)
+            return redirect('contest:home')
     else:
         form = UploadQrcodeForm()
         context = {'form':form}

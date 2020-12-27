@@ -10,7 +10,7 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _ 
 
-from .utils import generate_code
+from .utils import generate_code, encode_data
 
 
 class CustomUserManager(BaseUserManager):
@@ -58,7 +58,9 @@ class CustomUser(AbstractUser):
 
     def generate_qrcode(self):
         qr = qrcode.QRCode(version=1,error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=6, border=0)
-        qr.add_data(self.email)
+        email = self.email
+        data = encode_data(email)
+        qr.add_data(data)
         qr.make(fit=True)
         img = qr.make_image(fill='black', back_color='white')
         buffer = BytesIO()

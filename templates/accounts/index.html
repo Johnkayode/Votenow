@@ -8,9 +8,9 @@
       <div class='row justify-content-center'>
           <div class="col-lg-12">
               <center>
-                <img src="{{user.qr_code.url}}" alt="Qrcode" class="mb-2">
+                <img src="{{user.qr_code.url}}" alt="Qrcode" class="mb-2" width='300px' height='300px'>
                 <br>
-                <button class='btn btn-primary btn-block'>Download QRCode</button>
+                <a class='btn btn-primary btn-block' href='{{user.qr_code.url}}' download='{{user.name}}.jpg'>Download QRCode</a>
                 <p class='mt-1' style='font-size:12px'>Warning: Your QRcode is personal and should be secured.</p>
                 
                 <h3 class='mt-2'>{{user.name}}</h3>
