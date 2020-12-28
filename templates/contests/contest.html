@@ -1,8 +1,16 @@
-<div class="container">
-    <form method ='POST'>
-        {% csrf_token %}
-        <div class="form-group">
-            {{forms.as_p}}
+{% extends 'accounts/base.html' %}
+{% block title %} Create Event {% endblock %}
+
+{% block body %}
+    <div class="container" style="float: right; padding: 30px;">
+        <div class="container">
+            <form method ='POST'>
+                {% csrf_token %}
+                <div class="form-group">
+                    {{forms.as_p}}
+                </div>
+                <button class="btn btn-info">Create</button>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
+{% endblock %}
