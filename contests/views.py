@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .forms import UploadQrcodeForm
+from .forms import UploadQrcodeForm, CreateContestForm
 from .models import *
 
 import cv2 as cv
@@ -28,3 +28,13 @@ def verify(request):
         context = {'form':form}
         return render(request, 'contests/verify.html', context)
         
+
+def contest(request):
+    if request.method == 'POST':
+        form= CreateContestForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = CreateContestForm()
+        context = {'forms':form}
+        return render(request, 'contests/contest.html', context)

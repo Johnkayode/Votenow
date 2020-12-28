@@ -1,0 +1,8 @@
+<div class="container">
+    <form method ='POST'>
+        {% csrf_token %}
+        <div class="form-group">
+            {{forms.as_p}}
+        </div>
+    </form>
+</div>
