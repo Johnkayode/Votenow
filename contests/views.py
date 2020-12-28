@@ -32,11 +32,12 @@ def verify(request):
         
 
 def contest(request):
+    contest = Contest.objects.all()
     if request.method == 'POST':
         form= CreateContestForm(request.POST)
         if form.is_valid():
             form.save()
     else:
         form = CreateContestForm()
-        context = {'forms':form}
+        context = {'forms':form, 'contest':contest}
         return render(request, 'contests/contest.html', context)
