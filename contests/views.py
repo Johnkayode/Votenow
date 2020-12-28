@@ -1,12 +1,7 @@
 from accounts.utils import decode_data
 from django.shortcuts import render, redirect
 
-<<<<<<< HEAD
-
-from .forms import UploadQrcodeForm
-=======
 from .forms import UploadQrcodeForm, CreateContestForm
->>>>>>> contestform
 from .models import *
 
 import cv2 as cv
