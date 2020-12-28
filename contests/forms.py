@@ -7,9 +7,9 @@ class UploadQrcodeForm(forms.Form):
     qrcode = forms.FileField()
 
 class CreateContestForm(forms.Form):
-    Title= forms.CharField(max_length=100, widget=TextInput(attrs={'class':'form-control', 'placeholder':'Enter title of Contest', 'required':'required'}))
-    Description= forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Simple Description of contest', 'required':'required'}))
+    name = forms.CharField(max_length=100, widget=TextInput(attrs={'class':'form-control', 'placeholder':'Enter title of Contest', 'required':'required'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Simple Description of contest', 'required':'required'}))
 
     class meta:
-        name = 'Contest'
+        name = Contest
         fields = ['name', 'description']
