@@ -2,29 +2,30 @@
 
 {% block title %}DashBoard{% endblock %}
 {% block body %}
-<div class="main_content">
-    <div class="header">My Profile</div>  
-    <div class="info">
-      <div class='row justify-content-center'>
-          <div class="col-lg-12">
-              <center>
-                <img src="{{user.qr_code.url}}" alt="Qrcode" class="mb-2" width='300px' height='300px'>
-                <br>
-                <a class='btn btn-primary btn-block' href='{{user.qr_code.url}}' download='{{user.name}}.jpg'>Download QRCode</a>
-                <p class='mt-1' style='font-size:12px'>Warning: Your QRcode is personal and should be secured.</p>
-                
-                <h3 class='mt-2'>{{user.name}}</h3>
-                <p>{{user.email}}</p>
-              </center>
-          </div>
-      </div>
-        <h3>My Contests</h3>
-        <div style='background-color: #ffffff; padding:20px'>
-            <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
+    <div class="main_content">
+        <div class="header">My Profile</div>  
+        <div class="info">
+        <div class='row justify-content-center'>
+            <div class="col-lg-12">
+                <center>
+                    <img src="{{user.qr_code.url}}" alt="Qrcode" class="mb-2" width='300px' height='300px'>
+                    <br>
+                    <a class='btn btn-primary btn-block' href='{{user.qr_code.url}}' download='{{user.name}}.jpg'>Download QRCode</a>
+                    <p class='mt-1' style='font-size:12px'>Warning: Your QRcode is personal and should be secured.</p>
+                    
+                    <h3 class='mt-2'>{{user.name}}</h3>
+                    <p>{{user.email}}</p>
+                </center>
+            </div>
         </div>
-        <h3>Joined Contests</h3>
-        <div style='background-color: #ffffff; padding:20px'>
-            <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
+            <h3>My Contests</h3>
+            <div style='background-color: #ffffff; padding:20px'>
+                <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
+            </div>
+            <h3>Joined Contests</h3>
+            <div style='background-color: #ffffff; padding:20px'>
+                <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
+            </div>
         </div>
-</div>
+    </div>
 {% endblock%}
