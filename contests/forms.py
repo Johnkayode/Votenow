@@ -9,7 +9,7 @@ class UploadQrcodeForm(forms.Form):
 class CreateContestForm(forms.Form):
     name = forms.CharField(max_length=100, widget=TextInput(attrs={'class':'form-control', 'placeholder':'Enter title of Contest', 'required':'required'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Simple Description of contest', 'required':'required'}))
-    maximun_contestant = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Number of Contestant', 'required':'required'}))
+    maximun_contestant = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Add number of Contestant', 'required':'required'}))
 
     class meta:
         name = Contest
