@@ -6,11 +6,15 @@ from .models import *
 class UploadQrcodeForm(forms.Form):
     qrcode = forms.FileField()
 
-class CreateContestForm(forms.Form):
+class CreateContestForm(forms.ModelForm):
     name = forms.CharField(max_length=100, widget=TextInput(attrs={'class':'form-control', 'placeholder':'Enter title of Contest', 'required':'required'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Simple Description of contest', 'required':'required'}))
-    maximun_contestant = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control', 'type':'number', 'placeholder':'Number of contestant in your contest', 'required':'required'}))
+    max_contestants = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control', 'type':'number', 'placeholder':'Number of contestant in your contest', 'required':'required'}))
 
-    class meta:
-        name = Contest
+    class Meta:
+        model = Contest
         fields = ['name', 'description', 'max_contestants']
+
+class JoinContestForm(forms.Form):
+    contest_code = forms.CharField(max_length=12, widget=TextInput(attrs={'class':'form-control', 'placeholder':'Contest Code', 'required':'required'}))
+    manifesto = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Why should people vote you?', 'required':'required'}))

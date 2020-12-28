@@ -32,7 +32,7 @@
 
             <ul>
                 <li><a href="{% url 'account:dashboard' id=request.user.id %}"><i class="fas fa-home"></i>Home</a></li>
-                <li><a href="#"><i class="fas fa-project-diagram"></i>Join Contest</a></li>
+                <li><a href="{% url 'contest:join-contest' %}"><i class="fas fa-project-diagram"></i>Join Contest</a></li>
                 <li><a href="{% url 'contest:create-contest' %}"><i class="fas fa-poll-h"></i>Create Contest</a></li>
                 <li><a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
             </ul>

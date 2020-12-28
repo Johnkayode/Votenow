@@ -20,18 +20,27 @@
         </div>
             <div class="container" style="float: right;">
                 <h3>My Contests</h3>
-                <div style='background-color: #ffffff; padding:20px'>
-                    <div class="container">
-                        {% for contests in contest %}
-                            {% if contests is none %}
-                                <p>You haven't created any event/contest </p>
-                            {% else %}
-                                {{contest.name}} <small>Created by: {{ contests.organizer }}</small>
-                            {% endif %}
-                        {% endfor %}
+                {% if not contests %}
+                    <div style='background-color: #ffffff; padding:20px'>
+                        <div><p class='text-muted text-small'>You haven't created any contest yet</p></div>
                     </div>
-
-                </div>
+                {% else %}
+                    {% for contest in contests %}
+                        <div style='background-color: #ffffff; padding:20px'>
+                            <div>
+                                <p style='float:right'><i class='fas fa-poll'></i> 0 total votes</p>
+                                <h4>{{contest.name}}</h4>
+                                <p>{{contest.description}}</p>
+                                Contest Code: {{contest.contest_code}}<br>
+                                <h5 class='mt-2'>Contestants:</h5>
+                                {% for contestant in contest.contestant_set.all %}
+                                    <p>{{contestant.name}}<br><small>{{contestant.manifesto}}</small></p>
+                                {% endfor %}
+                                
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <h3>Joined Contests</h3>
                 <div style='background-color: #ffffff; padding:20px'>
                     <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>

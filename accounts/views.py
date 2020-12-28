@@ -12,8 +12,10 @@ from .forms import CustomAuthForm, UserRegistrationForm, ConfirmationForm
 @login_required
 def dashboard(request, id):
     user = CustomUser.objects.filter(id=id).first()
+    user_contests = user.contest_set.all()
+    
     if user == request.user:
-        context = {'user': user}
+        context = {'user': user, 'contests':user_contests}
         return render(request, 'accounts/index.html', context)
     return redirect('contest:home')
 
